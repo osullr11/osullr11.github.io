@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "api.fullname" . }}
+  labels:
+    app: {{ include "api.fullname" . }}
+    access: external
+spec:
+  ports:
+  - port: {{ .Values.service.port }}
+    protocol: {{ .Values.service.protocol }}
+    targetPort: {{ .Values.service.targetPort }}
+  selector:
+    app: {{ include "api.fullname" . }}
+    access: external
+  type: {{ .Values.service.type }}
